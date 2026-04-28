@@ -1,0 +1,636 @@
+/* ─────────────────────────────────────────
+   Movie Universe — Cinematic Dark Theme
+   ───────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg:          #0a0a0f;
+  --surface:     #12121a;
+  --surface-2:   #1c1c28;
+  --border:      rgba(255,255,255,0.07);
+  --accent:      #e8b84b;
+  --accent-dim:  rgba(232,184,75,0.15);
+  --text:        #eeeef2;
+  --text-muted:  #7a7a90;
+  --red:         #e8504b;
+  --radius:      14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  /* subtle noise texture */
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% -10%, rgba(232,184,75,0.08) 0%, transparent 70%);
+}
+
+/* ── NAVBAR ─────────────────────────────── */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,15,0.75) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 1.5rem;
+}
+
+.container-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.navbar-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.9rem;
+  letter-spacing: 0.06em;
+  color: var(--accent) !important;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.navbar-brand:hover { opacity: 0.8; }
+
+/* ── SEARCH FORM ─────────────────────────── */
+
+.form_submit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search_result {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.55rem 1rem;
+  width: clamp(180px, 25vw, 320px);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search_result::placeholder { color: var(--text-muted); }
+.search_result:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.55rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.btn-outline-success {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+.btn-outline-success:hover {
+  background: var(--accent);
+  color: #0a0a0f;
+  box-shadow: 0 4px 18px rgba(232,184,75,0.3);
+}
+
+/* ── MAIN ────────────────────────────────── */
+
+main {
+  padding: 2.5rem 1.5rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+section { width: 100%; }
+
+/* ── MOVIE CONTAINER ─────────────────────── */
+
+.movie_container {
+  display: flex;           /* default flex-direction: row */
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── MOVIE POSTER ────────────────────────── */
+
+.movie_poster {
+  flex-shrink: 0;
+}
+
+.movie_poster img {
+  width: 220px;
+  border-radius: 10px;
+  display: block;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  object-fit: cover;
+  aspect-ratio: 2/3;
+  transition: transform 0.3s ease;
+}
+.movie_poster img:hover { transform: scale(1.03); }
+
+/* ── MOVIE INNER DETAILS ─────────────────── */
+
+.movie_inner_details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.movie_inner_details h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.movie_inner_details p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.movie_inner_details p strong {
+  color: var(--accent);
+  font-weight: 600;
+  margin-right: 0.35rem;
+}
+
+/* ── GENRE TAGS ──────────────────────────── */
+
+.movie_genre {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.25rem;
+}
+
+.movie_genre div {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid rgba(232,184,75,0.3);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
+/* ── FOOTER ──────────────────────────────── */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+footer p {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+/* ── RESPONSIVE ──────────────────────────── */
+
+@media (max-width: 620px) {
+  .movie_container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .movie_poster img { width: 180px; }
+
+  .movie_genre { justify-content: center; }
+
+  .search_result { width: 100%; }
+
+  .form_submit { width: 100%; }
+}
+
+
+/* .dark {
+  --bg:          #0a0a0f;
+  --surface:     #12121a;
+  --surface-2:   #1c1c28;
+  --border:      rgba(255,255,255,0.07);
+  --accent:      #e8b84b;
+  --accent-dim:  rgba(232,184,75,0.15);
+  --text:        #eeeef2;
+  --text-muted:  #7a7a90;
+  --red:         #e8504b;
+  --navbar-bg:   rgba(10,10,15,0.75);
+  --body-gradient: radial-gradient(ellipse 80% 40% at 50% -10%, rgba(232,184,75,0.08) 0%, transparent 70%);
+  --shadow-card: 0 8px 40px rgba(0,0,0,0.50);
+  --shadow-img:  0 10px 40px rgba(0,0,0,0.60);
+} */
+
+
+/* ─────────────────────────────────────────
+   Movie Universe — Light Mode
+   ───────────────────────────────────────── */
+
+.light {
+  --bg:           #f5f6fa;
+  --surface:      #ffffff;
+  --surface-2:    #f1f2f6;
+  --border:       rgba(0,0,0,0.08);
+  --accent:       #d4a63a;
+  --accent-dim:   rgba(212,166,58,0.15);
+  --text:         #1c1c24;
+  --text-muted:   #6b6b80;
+  --red:          #e8504b;
+  --red-glow:     rgba(232,80,75,0.18);
+  --red-glow-md:  rgba(232,80,75,0.28);
+  --red-glow-lg:  rgba(232,80,75,0.12);
+}
+
+/* ── BODY ────────────────────────────────── */
+.light body {
+  background: var(--bg);
+  color: var(--text);
+  background-image:
+    radial-gradient(ellipse 90% 45% at 50% -5%,  rgba(232,80,75,0.10)  0%, transparent 55%),
+    radial-gradient(ellipse 60% 30% at 80% 100%, rgba(212,166,58,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 25% at 10% 90%,  rgba(232,80,75,0.07)  0%, transparent 60%);
+}
+
+/* ── NAVBAR ──────────────────────────────── */
+.light .navbar {
+  background: rgba(255,255,255,0.82) !important;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 0 rgba(232,80,75,0.08), 0 4px 24px rgba(232,80,75,0.06);
+}
+
+.light .navbar-brand {
+  color: var(--accent) !important;
+  text-shadow: 0 0 28px rgba(212,166,58,0.35);
+}
+
+/* ── SEARCH ──────────────────────────────── */
+.light .search_result {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.light .search_result:focus {
+  border-color: var(--red);
+  box-shadow:
+    inset 0 1px 3px rgba(0,0,0,0.04),
+    0 0 0 3px rgba(232,80,75,0.12);
+}
+
+/* ── BUTTON ──────────────────────────────── */
+.light .btn-outline-success {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+  box-shadow: 0 2px 10px rgba(212,166,58,0.12);
+  transition: all 0.22s ease;
+}
+
+.light .btn-outline-success:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow:
+    0 4px 18px rgba(212,166,58,0.30),
+    0 0 0 4px rgba(212,166,58,0.10);
+  transform: translateY(-1px);
+}
+
+.light .btn-outline-success:active {
+  transform: translateY(0px);
+  box-shadow: 0 2px 8px rgba(212,166,58,0.20);
+}
+
+/* ── MOVIE CONTAINER ─────────────────────── */
+.light .movie_container {
+  background: var(--surface);
+  border: 1px solid rgba(232,80,75,0.10);
+  box-shadow:
+    0 2px 0   rgba(232,80,75,0.08),
+    0 8px 24px rgba(232,80,75,0.10),
+    0 20px 60px rgba(232,80,75,0.07),
+    0 1px 0 rgba(255,255,255,0.9) inset;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* subtle red shimmer line at top of card */
+.light .movie_container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(232,80,75,0.5) 30%,
+    rgba(212,166,58,0.6) 60%,
+    transparent 100%);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* ambient red blob behind card */
+.light .movie_container::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(232,80,75,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.light .movie_container:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 2px 0   rgba(232,80,75,0.10),
+    0 14px 36px rgba(232,80,75,0.16),
+    0 30px 80px rgba(232,80,75,0.09);
+}
+
+/* ── MOVIE POSTER ────────────────────────── */
+.light .movie_poster img {
+  box-shadow:
+    0 4px 16px rgba(232,80,75,0.18),
+    0 12px 40px rgba(0,0,0,0.12);
+}
+
+.light .movie_poster img:hover {
+  box-shadow:
+    0 6px 24px rgba(232,80,75,0.28),
+    0 16px 50px rgba(0,0,0,0.15);
+}
+
+/* ── TEXT & DETAILS ──────────────────────── */
+.light .movie_inner_details h2 {
+  color: var(--text);
+}
+
+.light .movie_inner_details p {
+  color: var(--text-muted);
+}
+
+.light .movie_inner_details p strong {
+  color: var(--accent);
+}
+
+/* ── GENRE TAGS ──────────────────────────── */
+.light .movie_genre div {
+  background: rgba(232,80,75,0.07);
+  color: var(--red);
+  border: 1px solid rgba(232,80,75,0.20);
+  box-shadow: 0 1px 4px rgba(232,80,75,0.08);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.light .movie_genre div:hover {
+  background: rgba(232,80,75,0.13);
+  box-shadow: 0 2px 10px rgba(232,80,75,0.18);
+  transform: translateY(-1px);
+}
+
+/* ── FOOTER ──────────────────────────────── */
+.light footer {
+  border-top: 1px solid rgba(232,80,75,0.10);
+}
+
+.light footer p {
+  color: var(--text-muted);
+}
+
+/* ── THEME TOGGLE BUTTON ─────────────────── */
+.light .theme_toggle {
+  background: var(--surface-2);
+  border: 1px solid rgba(232,80,75,0.15);
+  color: var(--text);
+  box-shadow: 0 2px 10px rgba(232,80,75,0.08);
+}
+
+.light .theme_toggle:hover {
+  border-color: var(--red);
+  color: var(--red);
+  box-shadow: 0 4px 16px rgba(232,80,75,0.18);
+}
+
+
+
+
+/* ── THEME TOGGLE BUTTON ─────────────────── */
+.theme_toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 14px 5px 5px;
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.theme_toggle:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+/* ── CIRCLE TRACK ────────────────────────── */
+.toggle-track {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+
+/* ── ICON WRAPPER ────────────────────────── */
+.toggle-thumb {
+  position: relative;
+  width: 18px;
+  height: 18px;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  transition: opacity 0.25s, transform 0.35s;
+}
+
+/* ── DARK MODE (default) — show moon ─────── */
+.icon-moon {
+  opacity: 1;
+  transform: rotate(0deg);
+  color: #a0b4d6;
+}
+.icon-sun {
+  opacity: 0;
+  transform: rotate(90deg);
+  color: #e8b84b;
+}
+
+/* ── LIGHT MODE — show sun ───────────────── */
+.light .icon-moon {
+  opacity: 0;
+  transform: rotate(-90deg);
+}
+.light .icon-sun {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+/* ── TRACK COLOR PER MODE ────────────────── */
+.light .toggle-track {
+  background: #fff3c4;
+}
+
+/* ── LABEL ───────────────────────────────── */
+.toggle-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+  min-width: 32px;
+  transition: color 0.25s;
+}
+
+/* label text via CSS — no JS needed */
+.toggle-label::after {
+  content: 'Dark';
+}
+.light .toggle-label::after {
+  content: 'Light';
+}
+
+
+
+/* ── SUGGESTION BOX ──────────────────────── */
+
+.form_submit {
+  position: relative;
+}
+
+#suggestions {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: clamp(180px, 25vw, 320px);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 999;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  display: none;
+}
+
+#suggestions:not(:empty) {
+  display: block;
+}
+
+/* scrollbar */
+#suggestions::-webkit-scrollbar {
+  width: 4px;
+}
+#suggestions::-webkit-scrollbar-track {
+  background: var(--surface-2);
+  border-radius: 8px;
+}
+#suggestions::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 8px;
+}
+
+.suggest-item {
+  padding: 0.55rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  color: var(--text);
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s, color 0.15s;
+}
+
+.suggest-item:last-child {
+  border-bottom: none;
+}
+
+.suggest-item:hover {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* ── LIGHT MODE OVERRIDES ────────────────── */
+
+.light #suggestions {
+  background: var(--surface);
+  border-color: rgba(232, 80, 75, 0.12);
+  box-shadow: 0 8px 32px rgba(232, 80, 75, 0.10);
+}
+
+.light #suggestions::-webkit-scrollbar-track {
+  background: var(--surface-2);
+}
+
+.light #suggestions::-webkit-scrollbar-thumb {
+  background: rgba(232, 80, 75, 0.20);
+}
+
+.light .suggest-item {
+  border-bottom-color: rgba(232, 80, 75, 0.08);
+}
+
+.light .suggest-item:hover {
+  background: rgba(232, 80, 75, 0.07);
+  color: var(--red);
+}
+
+
+
+.suggestion_items {
+  cursor: pointer !important;
+}
